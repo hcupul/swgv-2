@@ -1,0 +1,66 @@
+/* Colores */
+.primary {background-color: #043A6F;}
+.primary:hover { background-color: #1861C0; }
+.secondary { background-color: #F2C52E; }
+.secondary:hover { background-color: #E9CF27; }
+.inverse { background-color: #FFFFFF; }
+.error { background-color: #BC0B0D; }
+.error:hover { background-color: #E40404; }
+.success { background-color: #1bc300; }
+.success:hover { background-color: #05d701; }
+.warning { background-color: #E4BC04; }
+.warning:hover { background-color: #FCD30B; }
+
+/* Colores */
+
+/* Estilos para Layout de 2 Columnas */
+.wrapper{
+  display:webkit-box;
+  display:webkit-flex;
+  display:flex;
+  height:100vh;
+ } /* Contenedor principal */
+
+.column-left, .column-right {
+  flex-direction: column;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display:flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  position: relative;
+  width:50%;
+} /* Columnas */
+
+.column-section {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  width:435px;
+} /* Seccion de columna para contenido centrado */
+
+/* Estilos para Layout de 2 Columnas */
+/* Cabeceras y secciones*/
+.content-head {padding: 1% 0;}
+.content-body { padding:2% 0; }
+/* Cabeceras y secciones*/
+
+/* Tablas */
+.scrollable-table { overflow-x: scroll; }
+/* Tablas */
+
+#login-background {
+    background: url(../img/policia2.jpg);
+    background-size: cover;
+}
