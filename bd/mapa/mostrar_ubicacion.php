@@ -2,33 +2,30 @@
 
 include ("../conexion.php");
 
-$idCelular= $_POST['id'];
+$idVehiculo = $_POST['id'];
 
 $sql = "
 SELECT 
     u.IdUbicacion AS IdUbicacion,
     u.Latitud, 
     u.Longitud, 
-    cel.Numero,
-    cel.IdCelular
-FROM ubicacioncelular ub
+    CONCAT('Vehículo ', ve.IdVehiculo, ' - ', IFNULL(us.Numero, 'Sin teléfono')) as Identificador
+FROM ubicacionvehiculo ub
 LEFT JOIN ubicacion u ON ub.IdUbicacion = u.IdUbicacion
-LEFT JOIN celular cel ON ub.IdCelular = cel.IdCelular
--- LEFT JOIN usuario us ON us.IdCelular = cel.IdCelular
--- LEFT JOIN vehiculo ve ON ve.IdConductor = us.IdUsuario
+LEFT JOIN vehiculo ve ON ub.IdVehiculo = ve.IdVehiculo
+LEFT JOIN usuario us ON us.IdUsuario = ve.IdConductor
 WHERE ub.IdUbicacion IN (
     SELECT 
         MAX(u.IdUbicacion) AS IdUbicacion
-    FROM ubicacioncelular ub
+    FROM ubicacionvehiculo ub
     LEFT JOIN ubicacion u ON ub.IdUbicacion = u.IdUbicacion
-    LEFT JOIN celular cel ON ub.IdCelular = cel.IdCelular
     WHERE ub.Estado = 1 AND u.Fecha >= DATE_SUB(NOW(),INTERVAL 1 HOUR) 
-    GROUP BY cel.IdCelular
+    GROUP BY ub.IdVehiculo
 ) 
 ";
 
-if($idCelular != "0") {
-    $sql = $sql . "AND ub.IdCelular = $idCelular ";
+if($idVehiculo != "0") {
+    $sql = $sql . "AND ub.IdVehiculo = $idVehiculo ";
 }
 
 $ubicacion = traerDatos($sql);

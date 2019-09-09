@@ -4,29 +4,28 @@ include ("../conexion.php");
 
 $sql = "
 SELECT
-    cel.IdCelular,
+    ve.IdVehiculo,
     IFNULL(ve.NumPlaca,'Ninguna') AS Placa,
     IFNULL((case when ve.IdConductor is null then 'Ninguno' else concat(us.Nombre) end), 'Ninguno') AS Conductor,
-    cel.Numero
-FROM celular cel 
-LEFT JOIN usuario us ON us.IdCelular = cel.IdCelular AND us.Estado = 1
-LEFT JOIN vehiculo ve ON ve.IdConductor = us.IdUsuario And ve.Estado = 1
-WHERE cel.Estado = 1 and cel.IdCelular in (
-    SELECT IdCelular 
-    FROM ubicacioncelular uc
-    LEFT JOIN ubicacion u ON uc.IdUbicacionCelular = uc.IdUbicacionCelular AND u.Estado = 1 
-    WHERE u.Estado = 1 AND u.Fecha >= DATE_SUB(NOW(),INTERVAL 1 HOUR)
-) ";
+    us.Numero
+FROM vehiculo ve
+LEFT JOIN usuario us ON ve.IdConductor = us.IdUsuario And ve.Estado = 1
+WHERE ve.Estado = 1 and ve.IdVehiculo in (
+    SELECT IdVehiculo 
+    FROM ubicacionvehiculo uv
+    LEFT JOIN ubicacion u ON uv.IdUbicacionVehiculo = uv.IdUbicacionVehiculo AND u.Estado = 1 
+    WHERE u.Estado = 1 AND u.Fecha >= DATE_SUB(NOW(), INTERVAL 1 HOUR)
+)";
 
-$celulares = traerDatos($sql);
+$vehiculos = traerDatos($sql);
 $i = 0;
 $style = "";
 
-foreach ($celulares as $cel) {
-    $id = $cel['IdCelular'];
-    $placa = $cel['Placa'];
-    $conductor = $cel['Conductor'];
-    $numero = $cel['Numero'];
+foreach ($vehiculos as $ve) {
+    $id = $ve['IdVehiculo'];
+    $placa = $ve['Placa'];
+    $conductor = $ve['Conductor'];
+    $numero = $ve['Numero'];
     $i++;
     if($i == 1){
 	$style = "primary";
@@ -39,7 +38,7 @@ foreach ($celulares as $cel) {
 	    <div class="card-body-icon">
 		<i class="fas fa-fw fa-car"></i>
 	    </div>
-	    <div class="mr-5">Vehículo #$id</div>
+	    <div class="mr-5">#$id - $numero</div>
 	    <div class="mr-5">Placa: $placa</div>
 	    <!--div class="mr-5">Conductor: $conductor</div-->
 	</div>

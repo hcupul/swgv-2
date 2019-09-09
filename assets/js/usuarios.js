@@ -27,9 +27,9 @@ function agregar() {
     var user = $('#txtUsuario').val();
     var pass = $('#txtPassword').val();
     var tipo = $('#txtTipoUsuario').val();
-    var idcelular = $('#txtCelular').val();
+    var numero = $('#txtCelular').val();
 
-    if (isEmpty(nom) || isEmpty(apepat) || isEmpty(apemat) || isEmpty(email) || isEmpty(puesto) || isEmpty(user) || isEmpty(pass) || isEmpty(tipo) || isEmpty(idcelular)) {
+    if (isEmpty(nom) || isEmpty(apepat) || isEmpty(apemat) || isEmpty(email) || isEmpty(puesto) || isEmpty(user) || isEmpty(pass) || isEmpty(tipo) || isEmpty(numero)) {
         alert("Rellene correctamente todos los campos.");
     } else {
         dataToSend = {
@@ -42,7 +42,7 @@ function agregar() {
             user: user,
             pass: pass,
             tipo: tipo,
-            idcelular: idcelular
+            numero: numero
         };
 
         $.ajax({
@@ -76,13 +76,13 @@ function actualizar() {
     var user = $('#txtUsuario').val();
     var pass = $('#txtPassword').val();
     var tipo = $('#txtTipoUsuario').val();
-    var idcelular = $('#txtCelular').val();
+    var numero = $('#txtCelular').val();
 
     if (isEmpty(pass)) {
         pass = "null";
     }
 
-    if (isEmpty(nom) || isEmpty(apepat) || isEmpty(apemat) || isEmpty(email) || isEmpty(puesto) || isEmpty(user) || isEmpty(tipo) || isEmpty(idcelular)) {
+    if (isEmpty(nom) || isEmpty(apepat) || isEmpty(apemat) || isEmpty(email) || isEmpty(puesto) || isEmpty(user) || isEmpty(tipo) || isEmpty(numero)) {
         alert("Rellene correctamente todos los campos.");
     } else {
         dataToSend = {
@@ -95,7 +95,7 @@ function actualizar() {
             user: user,
             pass: pass,
             tipo: tipo,
-            idcelular: idcelular
+            numero: numero
         };
 
         $.ajax({
@@ -181,35 +181,20 @@ function editar(id) {
             mostrarCargando();
         },
         success: function (response_user) {
-            $.ajax({
-                type: "post",
-                url: "bd/celulares/celulares_select.php",
-                data: dataToSend,
-                beforeSend: function () {
-                    mostrarCargando();
-                },
-                success: function (response) {
-                    $('#txtCelular').html(response);
-                    var user = JSON.parse(response_user);
-                    $('#txtFolio').val(user[0].IdUsuario);
-                    $('#txtNombre').val(user[0].Nombre);
-                    $('#txtApePat').val(user[0].ApellidoPat);
-                    $('#txtApeMat').val(user[0].ApellidoMat);
-                    $('#txtCorreo').val(user[0].Correo);
-                    $('#txtPuesto').val(user[0].Puesto);
-                    $('#txtUsuario').val(user[0].Usuario);
-                    $('#txtPassword').val("");
-                    $('#txtTipoUsuario').val(user[0].IdTipoUsuario);
-                    $('#txtCelular').val(user[0].IdCelular);
-                    $('#lblModal').html('Actualizar celular');
-                    $('#modal').modal('show');
-                    ocultarCargando();
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    mostrarMensaje(errorThrown);
-                    ocultarCargando();
-                }
-            });
+            var user = JSON.parse(response_user);
+            $('#txtFolio').val(user[0].IdUsuario);
+            $('#txtNombre').val(user[0].Nombre);
+            $('#txtApePat').val(user[0].ApellidoPat);
+            $('#txtApeMat').val(user[0].ApellidoMat);
+            $('#txtCorreo').val(user[0].Correo);
+            $('#txtPuesto').val(user[0].Puesto);
+            $('#txtUsuario').val(user[0].Usuario);
+            $('#txtPassword').val("");
+            $('#txtTipoUsuario').val(user[0].IdTipoUsuario);
+            $('#txtCelular').val(user[0].Numero);
+            $('#lblModal').html('Actualizar usuario');
+            $('#modal').modal('show');
+            ocultarCargando();
         },
         error: function (jqXHR, textStatus, errorThrown) {
             mostrarMensaje(errorThrown);
@@ -224,29 +209,6 @@ function btnAgregar_click() {
     $('#modal').modal('show');
 }
 
-function llenarCelulares() {
-    dataToSend = {
-        id: '0'    
-    };
-    
-    $.ajax({
-        type: "post",
-        url: "bd/celulares/celulares_select.php",
-        data: dataToSend,
-        beforeSend: function () {
-            mostrarCargando();
-        },
-        success: function (response) {
-            $('#txtCelular').html(response);
-            ocultarCargando();
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            mostrarMensaje(errorThrown);
-            ocultarCargando();
-        }
-    });
-}
-
 function limpiarCampos() {
     $('#txtFolio').val("0");
     $('#txtNombre').val("");
@@ -257,6 +219,5 @@ function limpiarCampos() {
     $('#txtUsuario').val("");
     $('#txtPassword').val("");
     $('#txtTipoUsuario').val("1");
-    llenarCelulares();
-    $('#txtCelular').val("0");
+    $('#txtCelular').val("");
 }

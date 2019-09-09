@@ -35,8 +35,8 @@ try {
     $temptipousuario = $_POST['tipo'];
     $tipousuario = trim($temptipousuario);
 
-    $tempidcelular = $_POST['idcelular'];
-    $idcelular = trim($tempidcelular);
+    $tempnumero= $_POST['numero'];
+    $numero = trim($tempnumero);
 
     $noEmpleado = '0';
 
@@ -49,23 +49,35 @@ try {
 	NoEmpleado = '$noEmpleado',
 	Puesto = '$puesto',
 	Usuario = '$usuario',
+	Numero = $numero,
     ";
 
     if ($password != "null") {
 	$sql .= "Password = '$password', ";
     }
-    
-    if($idcelular == "0"){
-	$sql .= " IdCelular = null, ";
-    } else {
-	$sql .= " IdCelular = '$idcelular', ";
-    }
 
     $sql .= "IdTipoUsuario = '$tipousuario' WHERE IdUsuario = '$id';";
+    
+    $sql2 = "SELECT Numero FROM usuario WHERE estado = 1 and Numero = '$numero' and IdUsuario != '$id'";
+    $arrayTelefonos = traerDatos($sql2);
+    $telefonosExistentes = sizeOf($arrayTelefonos);
 
-    if (guardarDatos($sql)) {
+     if($telefonosExistentes > 0){
+	echo "El telefono ingresado ya pertenece a otro usuario";
+    }
+    else if (guardarDatos($sql)) {
+	if($telefonosExistentes == 0){
+	    $sql3 = "SELECT Numero FROM celular WHERE estado = 1 and Numero = '$numero'";
+	    $arrayTelefonosRepetidos = traerDatos($sql3);
+	    $telefonosRepetidos = sizeOf($arrayTelefonosRepetidos);
+	    if($telefonosRepetidos == 0){
+		$sqlTelefono = "INSERT INTO celular (Marca, Modelo, Numero, Estado) VALUES ('Desconocido', 'Desconocido', '$numero', '1')";
+		guardarDatos($sqlTelefono);
+	    }
+	}
 	echo "El usuario fue actualizado correctamente";
-    } else {
+    } 
+    else {
 	echo "¡Error! No fue posible actualizar los datos del usuario";
     }
 } catch (Exception $e) {

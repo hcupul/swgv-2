@@ -51,9 +51,9 @@ if (!isset($_SESSION["id"])) {
 			<div class="card-header" id="lblMapa">
 			    <i class="fas fa-mobile-alt"></i>
 			    Celulares
-			    <button class="btn btn-primary btn-sm" onclick="btnAgregar_click();" style="margin-left: 10px;">
+			    <!--button class="btn btn-primary btn-sm" onclick="btnAgregar_click();" style="margin-left: 10px;">
 				<i class="fa fa-mobile-alt "></i> Agregar teléfono
-			    </button>
+			    </button-->
 			</div>
 			<div class="card-body">
 			    <div class="table-responsive">
@@ -102,7 +102,7 @@ if (!isset($_SESSION["id"])) {
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Número de teléfono:</label>
-                                                    <input id="txtNumero" class="form-control" placeholder="No. de teléfono">
+                                                    <input id="txtNumero" class="form-control" placeholder="No. de teléfono" disabled>
                                                 </div>
                                             </form>
                                         </div>

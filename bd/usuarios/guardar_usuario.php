@@ -27,30 +27,31 @@ try {
     $temptipousuario = $_POST['tipo'];
     $tipousuario = trim($temptipousuario);
 
-    $tempidcelular = $_POST['idcelular'];
-    $idcelular = trim($tempidcelular);
+    $tempnumero = $_POST['numero'];
+    $numero = trim($tempnumero);
 
     $noEmpleado = '0';
 
     $sql = "
     INSERT INTO usuario 
-    (Nombre, ApellidoPat, ApellidoMat, Correo, NoEmpleado, Puesto, Usuario, Password, IdTipoUsuario, IdCelular)
+    (Nombre, ApellidoPat, ApellidoMat, Correo, NoEmpleado, Puesto, Usuario, Password, IdTipoUsuario, Numero)
     VALUES
-    ('$nombre','$apepat','$apemat','$correo','$noEmpleado','$puesto','$usuario','$password','$tipousuario','$idcelular');
+    ('$nombre','$apepat','$apemat','$correo','$noEmpleado','$puesto','$usuario','$password','$tipousuario','$numero');
     ";
-
-    if ($idcelular == "0") {
-	$sql = "
-	INSERT INTO usuario 
-	(Nombre, ApellidoPat, ApellidoMat, Correo, NoEmpleado, Puesto, Usuario, Password, IdTipoUsuario, IdCelular)
-	VALUES
-	('$nombre','$apepat','$apemat','$correo','$noEmpleado','$puesto','$usuario','$password','$tipousuario',null);
-	";
+    
+    $sql2 = "SELECT Numero FROM usuario WHERE estado = 1 and Numero = '$numero'";
+    $arrayTelefonos = traerDatos($sql2);
+    $telefonosExistentes = sizeOf($arrayTelefonos);
+    
+    if($telefonosExistentes > 0){
+	echo "El telefono ingresado ya pertenece a otro usuario";
     }
-
-    if (guardarDatos($sql)) {
+    else if (guardarDatos($sql)) {
+	$sqlTelefono = "INSERT INTO celular (Marca, Modelo, Numero, Estado) VALUES ('Desconocido', 'Desconocido', '$numero', '1')";
+	guardarDatos($sqlTelefono);
 	echo "El usuario fue agregado correctamente";
-    } else {
+    }
+    else {
 	echo "¡Error! No fue posible agregar al usuario";
     }
 } catch (Exception $e) {

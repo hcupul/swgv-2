@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-09-2019 a las 02:15:47
+-- Tiempo de generación: 09-09-2019 a las 04:42:38
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 7.1.2
 
@@ -26,17 +26,17 @@ DELIMITER $$
 --
 -- Procedimientos
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPD_SET_InsertUbicacion` (`sIdCelular` INT, `sLatitud` TEXT, `sLongitud` TEXT)  BEGIN
+CREATE PROCEDURE `SPD_SET_InsertUbicacion` (IN `sIdVehiculo` INT, IN `sLatitud` TEXT, IN `sLongitud` TEXT)  BEGIN
 
 INSERT INTO ubicacion 
 (Latitud, Longitud, Fecha)
 VALUES 
 (sLatitud, sLongitud, NOW());
 
-INSERT INTO ubicacioncelular 
-(IdCelular, IdUbicacion)
+INSERT INTO ubicacionvehiculo
+(IdVehiculo, IdUbicacion)
 VALUES 
-(sIdCelular, LAST_INSERT_ID());
+(sIdVehiculo, LAST_INSERT_ID());
 
 END$$
 
@@ -61,10 +61,11 @@ CREATE TABLE `celular` (
 --
 
 INSERT INTO `celular` (`IdCelular`, `Marca`, `Modelo`, `Numero`, `Estado`) VALUES
-(1, 'Motorola', 'G5', '9981263390', 1),
-(2, 'Motorola', 'G6', '9988111112', 1),
-(3, 'Nokia', '1998', '8888', 0),
-(4, 'fsfdsf', 'dsfdsfsdf', '35467688', 0);
+(1, 'Moto', 'G5', '9981263390', 1),
+(2, 'Desconocido', 'Desconocido', '9988946426', 1),
+(3, 'Desconocido', 'Desconocido', '9991904736', 1),
+(4, 'Desconocido', 'Desconocido', '9982643875', 1),
+(5, 'Desconocido', 'Desconocido', '9982643874', 1);
 
 -- --------------------------------------------------------
 
@@ -121,51 +122,37 @@ CREATE TABLE `ubicacion` (
 --
 
 INSERT INTO `ubicacion` (`IdUbicacion`, `Latitud`, `Longitud`, `Fecha`, `Estado`) VALUES
-(1, '21.0495167', '-86.849008', '2019-03-24 13:19:14', 1),
-(2, '21.0495167', '-86.849008', '2019-03-24 13:25:46', 1),
-(3, '21.0495167', '-86.849008', '2019-03-24 13:25:59', 1),
-(4, '21.0495167', '-86.849008', '2019-03-24 13:26:21', 1),
-(5, '21.0495167', '-86.849008', '2019-03-24 13:28:27', 1),
-(6, '21.0595167', '-86.859008', '2019-03-31 22:10:56', 1),
-(7, '21.0595167', '-86.859008', '2019-09-08 16:43:58', 1),
-(8, '21.0595167', '-86.859008', '2019-09-08 16:44:25', 1),
-(9, '21.1456647', '-86.859008', '2019-09-08 16:47:51', 1),
-(10, '21.1456647', '-86.859008', '2019-09-08 16:48:05', 1),
-(11, '21.1456647', '-86.8849286', '2019-09-08 16:48:26', 1),
-(12, '22.1456647', '-87.8849286', '2019-09-08 16:52:15', 1),
-(13, '21.1456647', '-86.8849286', '2019-09-08 17:03:25', 1),
-(14, '21.1707251', '-86.8491041', '2019-09-08 17:07:31', 1);
+(1, '21.1456647', '-86.8849286', '2019-09-08 21:31:02', 1),
+(3, '21.1456647', '-86.8849286', '2019-09-08 21:34:29', 1),
+(4, '21.1456647', '-86.8849286', '2019-09-08 21:35:08', 1),
+(5, '21.1456647', '-86.8849286', '2019-09-08 21:35:23', 1),
+(6, '21.1456647', '-86.8849286', '2019-09-08 21:36:34', 1),
+(7, '21.3456647', '-86.9849286', '2019-09-08 21:37:24', 1),
+(8, '21.3456647', '-86.9849286', '2019-09-08 21:38:25', 1),
+(9, '21.1707251', '-86.8849286', '2019-09-08 21:39:16', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ubicacioncelular`
+-- Estructura de tabla para la tabla `ubicacionvehiculo`
 --
 
-CREATE TABLE `ubicacioncelular` (
-  `IdUbicacionCelular` int(11) NOT NULL,
-  `IdCelular` int(11) NOT NULL,
+CREATE TABLE `ubicacionvehiculo` (
+  `IdUbicacionVehiculo` int(11) NOT NULL,
+  `IdVehiculo` int(11) NOT NULL,
   `IdUbicacion` int(11) NOT NULL,
-  `Estado` tinyint(1) NOT NULL DEFAULT '1'
+  `estado` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `ubicacioncelular`
+-- Volcado de datos para la tabla `ubicacionvehiculo`
 --
 
-INSERT INTO `ubicacioncelular` (`IdUbicacionCelular`, `IdCelular`, `IdUbicacion`, `Estado`) VALUES
+INSERT INTO `ubicacionvehiculo` (`IdUbicacionVehiculo`, `IdVehiculo`, `IdUbicacion`, `estado`) VALUES
 (1, 1, 1, 1),
-(3, 1, 3, 1),
-(4, 1, 4, 1),
-(5, 1, 5, 1),
-(6, 2, 6, 1),
-(8, 1, 8, 1),
-(9, 1, 9, 1),
-(10, 1, 10, 1),
-(11, 1, 11, 1),
-(12, 1, 12, 1),
-(13, 1, 13, 1),
-(14, 2, 14, 1);
+(2, 1, 6, 1),
+(4, 1, 8, 1),
+(5, 2, 9, 1);
 
 -- --------------------------------------------------------
 
@@ -184,7 +171,7 @@ CREATE TABLE `usuario` (
   `Usuario` varchar(50) NOT NULL,
   `Password` text NOT NULL,
   `IdTipoUsuario` int(11) NOT NULL,
-  `IdCelular` int(11) DEFAULT NULL,
+  `Numero` varchar(50) NOT NULL,
   `Estado` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -192,10 +179,11 @@ CREATE TABLE `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`IdUsuario`, `Nombre`, `ApellidoPat`, `ApellidoMat`, `Correo`, `NoEmpleado`, `Puesto`, `Usuario`, `Password`, `IdTipoUsuario`, `IdCelular`, `Estado`) VALUES
-(1, 'Humberto', 'Cupul', 'Kuyoc', 'hcupul@mexicodestinos.com', 0, 'Admin', 'hcupul', '202cb962ac59075b964b07152d234b70', 1, 1, 1),
-(2, 'Jesus', 'Albino', 'Vicaria', 'albino@vicaria.com', 0, 'Admin', 'jesus', '202cb962ac59075b964b07152d234b70', 1, NULL, 1),
-(3, 'Aber', 'Aber', 'ereer', 'hjhjhj', 0, 'jhjhj', 'hjhjhj', '0808610cb0643f72f3918410d4d84d0a', 2, 2, 0);
+INSERT INTO `usuario` (`IdUsuario`, `Nombre`, `ApellidoPat`, `ApellidoMat`, `Correo`, `NoEmpleado`, `Puesto`, `Usuario`, `Password`, `IdTipoUsuario`, `Numero`, `Estado`) VALUES
+(1, 'Humberto', 'Cupul', 'Kuyoc', 'hcupul@mexicodestinos.com', 0, 'Administrador', 'humberto', '202cb962ac59075b964b07152d234b70', 1, '9981263390', 1),
+(2, 'Jesus', 'Albino', 'Vicaria', 'jesus@jesus.com', 0, 'Administrador', 'jesus', '202cb962ac59075b964b07152d234b70', 1, '9988946426', 1),
+(3, 'Joshua', 'Valdez', 'Sosa', 'joshua@joshua.com', 0, 'Programador', 'joshua', '202cb962ac59075b964b07152d234b70', 1, '9991904736', 1),
+(4, 'Vladimir', 'Pool', 'Estrella', 'vladi@utcancun.com', 0, 'Empleado', 'vladimir', '202cb962ac59075b964b07152d234b70', 1, '9982643875', 1);
 
 -- --------------------------------------------------------
 
@@ -219,33 +207,8 @@ CREATE TABLE `vehiculo` (
 --
 
 INSERT INTO `vehiculo` (`IdVehiculo`, `Marca`, `Modelo`, `NumUnidad`, `NumPlaca`, `NumSerie`, `IdConductor`, `Estado`) VALUES
-(1, 'Toyota', '2016', '1', 'JDKSK2', '1359', 2, 1),
-(2, 'Chevrolet', '2', '121342', 'ADSAASF', '1', 1, 1),
-(3, '1121212', 'dggf', 'fdgfg', 'fdgfgf', 'dfggf', NULL, 0),
-(4, 'Prueba', 'sfdfdsfds', 'dsffdfds', 'sdffsdfds', 'fdsf', NULL, 0);
-
--- --------------------------------------------------------
-
---
--- Estructura Stand-in para la vista `v_ultimasubicaciones`
--- (Véase abajo para la vista actual)
---
-CREATE TABLE `v_ultimasubicaciones` (
-`IdUbicacion` int(11)
-,`Latitud` text
-,`Longitud` text
-,`Numero` varchar(50)
-,`IdCelular` int(11)
-);
-
--- --------------------------------------------------------
-
---
--- Estructura para la vista `v_ultimasubicaciones`
---
-DROP TABLE IF EXISTS `v_ultimasubicaciones`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_ultimasubicaciones`  AS  select `u`.`IdUbicacion` AS `IdUbicacion`,`u`.`Latitud` AS `Latitud`,`u`.`Longitud` AS `Longitud`,`cel`.`Numero` AS `Numero`,`cel`.`IdCelular` AS `IdCelular` from ((`ubicacioncelular` `ub` left join `ubicacion` `u` on((`ub`.`IdUbicacion` = `u`.`IdUbicacion`))) left join `celular` `cel` on((`ub`.`IdCelular` = `cel`.`IdCelular`))) where ((`ub`.`Estado` = 1) and (`ub`.`IdCelular` = 1)) order by `u`.`IdUbicacion` desc ;
+(1, 'Toyota', '2017', '11509', 'H223HW', '678902112', 4, 1),
+(2, 'Chevrolet', '2018', '391', 'HE232H', '83288942', 1, 1);
 
 --
 -- Índices para tablas volcadas
@@ -279,20 +242,19 @@ ALTER TABLE `ubicacion`
   ADD PRIMARY KEY (`IdUbicacion`);
 
 --
--- Indices de la tabla `ubicacioncelular`
+-- Indices de la tabla `ubicacionvehiculo`
 --
-ALTER TABLE `ubicacioncelular`
-  ADD PRIMARY KEY (`IdUbicacionCelular`,`IdCelular`,`IdUbicacion`),
-  ADD KEY `fk_Celular_has_ubicacion_ubicacion1_idx` (`IdUbicacion`),
-  ADD KEY `fk_Celular_has_ubicacion_Celular1_idx` (`IdCelular`);
+ALTER TABLE `ubicacionvehiculo`
+  ADD PRIMARY KEY (`IdUbicacionVehiculo`,`IdVehiculo`,`IdUbicacion`),
+  ADD KEY `fk_vehiculo_has_ubicacion_ubicacion1_idx` (`IdUbicacion`),
+  ADD KEY `fk_vehiculo_has_ubicacion_vehiculo1_idx` (`IdVehiculo`);
 
 --
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`IdUsuario`),
-  ADD KEY `fk_Usuario_TipoUsuario1_idx` (`IdTipoUsuario`),
-  ADD KEY `fk_usuario_celular1_idx` (`IdCelular`);
+  ADD KEY `fk_Usuario_TipoUsuario1_idx` (`IdTipoUsuario`);
 
 --
 -- Indices de la tabla `vehiculo`
@@ -310,7 +272,7 @@ ALTER TABLE `vehiculo`
 -- AUTO_INCREMENT de la tabla `celular`
 --
 ALTER TABLE `celular`
-  MODIFY `IdCelular` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `IdCelular` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `reporte`
 --
@@ -325,22 +287,22 @@ ALTER TABLE `tipousuario`
 -- AUTO_INCREMENT de la tabla `ubicacion`
 --
 ALTER TABLE `ubicacion`
-  MODIFY `IdUbicacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `IdUbicacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
--- AUTO_INCREMENT de la tabla `ubicacioncelular`
+-- AUTO_INCREMENT de la tabla `ubicacionvehiculo`
 --
-ALTER TABLE `ubicacioncelular`
-  MODIFY `IdUbicacionCelular` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+ALTER TABLE `ubicacionvehiculo`
+  MODIFY `IdUbicacionVehiculo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `IdUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `IdUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `vehiculo`
 --
 ALTER TABLE `vehiculo`
-  MODIFY `IdVehiculo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `IdVehiculo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Restricciones para tablas volcadas
 --
@@ -354,18 +316,17 @@ ALTER TABLE `reporte`
   ADD CONSTRAINT `fk_reporte_ubicacion2` FOREIGN KEY (`IdUbicacionDestino`) REFERENCES `ubicacion` (`IdUbicacion`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `ubicacioncelular`
+-- Filtros para la tabla `ubicacionvehiculo`
 --
-ALTER TABLE `ubicacioncelular`
-  ADD CONSTRAINT `fk_Celular_has_ubicacion_Celular1` FOREIGN KEY (`IdCelular`) REFERENCES `celular` (`IdCelular`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Celular_has_ubicacion_ubicacion1` FOREIGN KEY (`IdUbicacion`) REFERENCES `ubicacion` (`IdUbicacion`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `ubicacionvehiculo`
+  ADD CONSTRAINT `fk_vehiculo_has_ubicacion_ubicacion1` FOREIGN KEY (`IdUbicacion`) REFERENCES `ubicacion` (`IdUbicacion`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_vehiculo_has_ubicacion_vehiculo1` FOREIGN KEY (`IdVehiculo`) REFERENCES `vehiculo` (`IdVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD CONSTRAINT `fk_Usuario_TipoUsuario1` FOREIGN KEY (`IdTipoUsuario`) REFERENCES `tipousuario` (`IdTipoUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_usuario_celular1` FOREIGN KEY (`IdCelular`) REFERENCES `celular` (`IdCelular`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_Usuario_TipoUsuario1` FOREIGN KEY (`IdTipoUsuario`) REFERENCES `tipousuario` (`IdTipoUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `vehiculo`

@@ -6,7 +6,7 @@ $(document).ready(function () {
     }, 5000);
     setInterval(function () {
         cargarVehiculos();
-    }, 60000);
+    }, 10000);
 });
 var mapa;
 var ubicaciones = []; // Create a marker array to hold your ubicaciones
@@ -39,7 +39,7 @@ function mostrarUbicaciones() {
                         position: posicion,
                         map: mapa,
                         animation: null,//google.maps.Animation.DROP,
-                        title: vehiculo.Numero,
+                        title: vehiculo.Identificador,
                         zIndex: i
                     });
                     ubicaciones.push(ubicacion);

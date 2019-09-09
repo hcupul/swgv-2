@@ -66,7 +66,7 @@ if (!isset($_SESSION["id"])) {
 					    <th>Usuario</th>
 					    <th>Tipo Usuario</th>
 					    <th>No. teléfono</th>
-					    <th>Estado</th>
+					    <!--th>Estado</th-->
 					    <th>Acciones</th>
 					</tr>
 				    </thead>
@@ -134,9 +134,7 @@ if (!isset($_SESSION["id"])) {
 						</div>
 						<div class="form-group">
 						    <label>Teléfono celular</label>
-						    <select class="form-control" id="txtCelular"/>
-						    <option value="0">Ninguno</option>
-						    </select>
+						    <input type="number" class="form-control" id="txtCelular" placeholder="No. celular"/>
 						</div>
                                             </form>
                                         </div>

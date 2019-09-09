@@ -16,7 +16,7 @@ SELECT
     Usuario, 
     Password, 
     IdTipoUsuario, 
-    IFNULL(IdCelular, 0) AS IdCelular, 
+    Numero, 
     Estado 
 FROM usuario 
 WHERE IdUsuario = $id;";

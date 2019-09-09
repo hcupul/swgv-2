@@ -11,15 +11,11 @@ select
     us.Puesto AS Puesto,
     us.Usuario AS Usuario,
     tp.Descripcion AS TipoUsuario, 
-    IFNULL(cel.Numero, 'Ninguno') AS Numero,
+    IFNULL(us.Numero, '0000000000') AS Numero,
     (case when (us.Estado = 1) then 'Activo' else 'Inactivo' end) AS Estado 
 from usuario us 
 	left join tipousuario tp on us.IdTipoUsuario = tp.IdTipoUsuario 
-    left join celular cel on cel.IdCelular = us.IdCelular and cel.Estado = 1
-where us.Estado = 1 
-    -- and us.IdUsuario not in (select IdConductor from vehiculo where Estado = 1);
-
-";
+where us.Estado = 1 ";
 
 $arrayUsuarios = traerDatos($sql);
 foreach ($arrayUsuarios as $user) {
@@ -39,7 +35,7 @@ foreach ($arrayUsuarios as $user) {
 	    <td>$usuario</td>
 	    <td>$tipo</td>
 	    <td>$numero</td>
-	    <td>$estado</td>
+	    <!--td>$estado</td-->
             <td>
 		<div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
 		  <button type="button" class="btn btn-warning" id='editar' onclick='editar($id)' style="color: white;"><i class="fa fa-edit"></i></button>

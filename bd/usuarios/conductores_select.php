@@ -12,8 +12,8 @@ select
     us.Usuario AS Usuario,
     tp.Descripcion AS TipoUsuario, 
     (case when (us.Estado = 1) then 'Activo' else 'Inactivo' end) AS Estado 
-from usuario us 
-	left join tipousuario tp on us.IdTipoUsuario = tp.IdTipoUsuario 
+from usuario us
+left join tipousuario tp on us.IdTipoUsuario = tp.IdTipoUsuario 
 where us.Estado = 1 
     -- and us.IdUsuario not in (select IdConductor from vehiculo where Estado = 1);
 
