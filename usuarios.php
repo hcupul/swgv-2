@@ -27,7 +27,7 @@ if (!isset($_SESSION["id"])) {
 
     <body id="page-top">
 
-	<?php include 'includes/header.html'; ?>
+	<?php include 'includes/header.php'; ?>
 
 	<div id="wrapper">
 

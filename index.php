@@ -18,7 +18,9 @@ if (!empty($_POST)) {
     // usamos el método CANTIDAD para saber el num de registros
     $usuarios = traerDatos($sql);
     $total = 0;
-    foreach ($usuarios as $usuario) {
+    foreach ($usuarios as $user) {
+	$_SESSION['nombre'] = $user['Nombre'];
+	$_SESSION['id'] = $user['IdUsuario'];
 	$total ++;
     }
     if ($total > 0) {

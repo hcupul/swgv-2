@@ -1,8 +1,8 @@
 <?php
 
 function conectarBD() {
-    $conexion = mysqli_connect("localhost", "root", "", "sgv");
-    //$conexion = mysqli_connect("localhost", "u969154419_gps", "1xc2cnDRSHPK", "u969154419_gps");
+    //$conexion = mysqli_connect("localhost", "root", "", "sgv");
+    $conexion = mysqli_connect("localhost", "id10812361_root", "12345", "id10812361_sgv");
     return $conexion;
 }
 
