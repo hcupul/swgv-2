@@ -124,7 +124,7 @@ if (!isset($_SESSION["id"])) {
         <script src="assets/js/jquery.metisMenu.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-S005DFqtS74k_AAejRTVsC4ZxNlM34s"></script>
         <script src="assets/js/funciones.js"></script>
-	<script src="assets/js/mapav2.js"></script>
+	<script src="assets/js/mapav2.js?v=1.8"></script>
 	<script src="assets/js/mapa_individual.js"></script>
 	<script>
 	    menuActivo('#aMenuMapa');

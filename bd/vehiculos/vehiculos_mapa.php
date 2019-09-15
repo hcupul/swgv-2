@@ -13,7 +13,7 @@ LEFT JOIN usuario us ON ve.IdConductor = us.IdUsuario And ve.Estado = 1
 WHERE ve.Estado = 1 and ve.IdVehiculo in (
     SELECT IdVehiculo 
     FROM ubicacionvehiculo uv
-    LEFT JOIN ubicacion u ON uv.IdUbicacionVehiculo = uv.IdUbicacionVehiculo AND u.Estado = 1 
+    LEFT JOIN ubicacion u ON u.IdUbicacion = uv.IdUbicacion AND u.Estado = 1 
     WHERE u.Estado = 1 AND u.Fecha >= DATE_SUB(NOW(), INTERVAL 1 HOUR)
 )";
 
