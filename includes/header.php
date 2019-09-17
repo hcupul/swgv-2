@@ -37,7 +37,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <div class="modal-body">Haz click en "Salir" para finalizar tu sesión actual</div>
+            <div class="modal-body">Confirme, por favor</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
                 <a class="btn btn-danger" href="cerrar-sesion.php">Salir</a>

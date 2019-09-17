@@ -3,10 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/workspace/SWGV-2/bd/usuarios/guardar_usuario.php</file>
+            <file>file:/C:/xampp/htdocs/workspace/SWGV-2/celulares.php</file>
             <file>file:/C:/xampp/htdocs/workspace/SWGV-2/vehiculos.php</file>
-            <file>file:/C:/xampp/htdocs/workspace/SWGV-2/bd/vehiculos/vehiculos_mapa.php</file>
+            <file>file:/C:/xampp/htdocs/workspace/SWGV-2/index.php</file>
+            <file>file:/C:/xampp/htdocs/workspace/SWGV-2/cerrar-sesion.php</file>
             <file>file:/C:/xampp/htdocs/workspace/SWGV-2/usuarios.php</file>
+            <file>file:/C:/xampp/htdocs/workspace/SWGV-2/mapa.php</file>
+            <file>file:/C:/xampp/htdocs/workspace/SWGV-2/bd/conexion.php</file>
+            <file>file:/C:/xampp/htdocs/workspace/SWGV-2/includes/header.php</file>
         </group>
     </open-files>
 </project-private>
