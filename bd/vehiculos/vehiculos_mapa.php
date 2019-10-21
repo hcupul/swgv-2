@@ -38,8 +38,8 @@ foreach ($vehiculos as $ve) {
 	    <div class="card-body-icon">
 		<i class="fas fa-fw fa-car"></i>
 	    </div>
-	    <div class="mr-5">#$id - $numero</div>
-	    <div class="mr-5">Placa: $placa</div>
+	    <div class="mr-5">Vehículo #$id</div>
+	    <div class="mr-5">Tel: $numero</div>
 	    <!--div class="mr-5">Conductor: $conductor</div-->
 	</div>
 	<a class="card-footer text-white clearfix small z-1" onclick="verVehiculo($id, event)" href="#">

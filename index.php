@@ -27,7 +27,7 @@ if (!empty($_POST)) {
 	$_SESSION['id'] = $usuario;
 	header("location: mapa.php");
     } else {
-	echo '<script type="text/javascript">alert("Usuario o contraseña incorrectos");</script>';
+	header("location: index.php?login=failed");
     }
 }
 ?>
@@ -38,8 +38,6 @@ if (!empty($_POST)) {
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="assets/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 	<link href="assets/css/login.css" rel="stylesheet">
-	<script src="assets/js/bootstrap.min.js"></script>
-	<script src="assets/js/jquery-1.11.1.min.js"></script>
 	<title>Iniciar sesión | Sistema Web de Geolocalización de Vehículos</title>
 	<link rel="icon" href="assets/img/icon-small.png">
     </head>
@@ -55,5 +53,30 @@ if (!empty($_POST)) {
 		</form><!-- /form -->
 	    </div><!-- /card-container -->
 	</div>
+	<div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="lblModal" aria-hidden="true">
+	    <div class="modal-dialog">
+		<div class="modal-content">
+		    <div class="modal-header">
+			<h5 class="modal-title" id="exampleModalLabel">Intente de nuevo</h5>
+			<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+			    <span aria-hidden="true">×</span>
+			</button>
+		    </div>
+		    <div class="modal-body" id="dvMensaje">
+			Usuario o contraseña incorrectos
+		    </div>
+		    <div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+		    </div>
+		</div>
+	    </div>
+	</div>
     </body>
+    <script src="assets/vendor/jquery/jquery.min.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script>
+    if(window.location.search.substr(1) === "login=failed"){
+	$('#modalLogin').modal('show');
+    }
+    </script>
 </html>

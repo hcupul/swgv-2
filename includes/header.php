@@ -13,7 +13,7 @@
     <!-- Navbar -->
     <ul class="navbar-nav ml-auto ml-md-0">
         <li class="dropdown" id="dvLoading" style="display: none;">
-            <img src="assets/img/loader.gif" height="40" />
+            <img src="assets/img/loader.gif" height="40" style="display: none;" />
         </li>
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -37,7 +37,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <div class="modal-body">Confirme, por favor</div>
+            <div class="modal-body">Confirme que desea finalizar su sesión actual, por favor</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
                 <a class="btn btn-danger" href="cerrar-sesion.php">Salir</a>

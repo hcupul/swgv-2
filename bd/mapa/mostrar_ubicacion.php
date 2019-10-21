@@ -9,6 +9,8 @@ SELECT
     u.IdUbicacion AS IdUbicacion,
     u.Latitud, 
     u.Longitud, 
+    CONCAT('Vehículo ', ve.IdVehiculo) as Nombre,
+    IFNULL(us.Numero, 'Sin teléfono') as Telefono,
     CONCAT('Vehículo ', ve.IdVehiculo, ' - ', IFNULL(us.Numero, 'Sin teléfono')) as Identificador
 FROM ubicacionvehiculo ub
 LEFT JOIN ubicacion u ON ub.IdUbicacion = u.IdUbicacion

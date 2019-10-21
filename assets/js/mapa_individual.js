@@ -83,9 +83,34 @@ function inicializarMapaIndividual() {
 function verVehiculo(id, e) {
     e.preventDefault();
     $("#idVehiculo").val(id);
+    cargarVehiculoIndividual();
     inicializarMapaIndividual();
     setInterval(function () {
         actualizarUbicacionIndividual();
     }, 5000);
     $("#modalMapa").modal('show');
+}
+
+function cargarVehiculoIndividual() {
+    var id = $("#idVehiculo").val();
+    dataToSend = {
+        id: id
+    };
+    $.ajax({
+        type: "post",
+        url: "bd/vehiculos/vehiculos_individual.php",
+        timeout: 5000,
+        data: dataToSend,
+        beforeSend: function () {
+            mostrarCargando();
+        },
+        success: function (response) {
+            $('#infoIndividual').html(response);
+            ocultarCargando();
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR+ " : " + textStatus + " : " + errorThrown);
+            ocultarCargando();
+        }
+    });
 }

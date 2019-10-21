@@ -39,7 +39,7 @@ foreach ($vehiculos as $vehiculo) {
             <td>
 		<div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
 		  <button type="button" class="btn btn-warning" id='editar' onclick='editar($id)' style="color: white;"><i class="fa fa-edit"></i></button>
-		  <button type="button" class="btn btn-danger" id='eliminar' onclick='confirmaEliminar($id)'><i class="fa fa-trash"></i></button>
+		  <button type="button" class="btn btn-danger" id='eliminar' onclick='confirmaEliminar($id)' disabled><i class="fa fa-trash"></i></button>
 		</div>
 	    </td>
         </tr>

@@ -87,10 +87,16 @@ if (!isset($_SESSION["id"])) {
                 </button>
 			</div>
 			<div class="modal-body">
-			    <div id="mapaIndividual" style="border:0; height:400px; width: 100%;"></div>
+			    <div class="row">
+				<div class="col-lg-9 col-xs-12">
+				    <div id="mapaIndividual" style="border:0; height:400px; width: 100%;"></div>
+				</div>
+				<div class="col-lg-3 col-xs-12" id="infoIndividual">
+				</div>
+			    </div>
 			</div>
 			<div class="modal-footer">
-			    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+			    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 			</div>
 		    </div>
 		</div>
@@ -124,8 +130,8 @@ if (!isset($_SESSION["id"])) {
         <script src="assets/js/jquery.metisMenu.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-S005DFqtS74k_AAejRTVsC4ZxNlM34s"></script>
         <script src="assets/js/funciones.js"></script>
-	<script src="assets/js/mapav2.js?v=1.8"></script>
-	<script src="assets/js/mapa_individual.js"></script>
+	<script src="assets/js/mapav2.js?v=2.0"></script>
+	<script src="assets/js/mapa_individual.js?v=1.1"></script>
 	<script>
 	    menuActivo('#aMenuMapa');
 	</script>
