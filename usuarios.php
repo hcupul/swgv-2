@@ -50,7 +50,7 @@ if (!isset($_SESSION["id"])) {
 		    <div class="card mb-3">
 			<div class="card-header" id="lblMapa">
 			    <i class="fas fa-users"></i>
-			    Vehículos
+			    Usuarios
 			    <button class="btn btn-primary btn-sm" onclick="btnAgregar_click();" style="margin-left: 10px;">
 				<i class="fa fa-user "></i> Agregar usuario
 			    </button>
